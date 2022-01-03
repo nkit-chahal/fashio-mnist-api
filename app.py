@@ -14,12 +14,10 @@ with open('fashion_model_flask.json', 'r') as f:
     model_json = f.read()
 
 model = tf.keras.models.model_from_json(model_json)
-# load weights into new model
 model.load_weights("fashion_model_flask.h5")
 
 
-# Creating the Flask API
-#Starting the Flask application
+
 app = Flask(__name__)
 
 #classify_image function
@@ -31,7 +29,6 @@ def classify_image(img_name):
     #list of class names 
     classes = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat", "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
 
-    #have to reshape for predictions
     prediction = model.predict([image.reshape(1, 28*28)])
 
     
